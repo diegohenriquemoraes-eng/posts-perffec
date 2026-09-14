@@ -196,7 +196,7 @@ def _slide_base(cor_fundo) -> tuple[Image.Image, ImageDraw.ImageDraw]:
     return im, ImageDraw.Draw(im)
 
 
-def _ajustar_corpo(texto: str, largura: int, disponivel: int, tam: int = 46) -> ImageFont.FreeTypeFont:
+def _ajustar_corpo(texto: str, largura: int, disponivel: int, tam: int = 44) -> ImageFont.FreeTypeFont:
     """Reduz o corpo até caber na altura disponível (mínimo 34px)."""
     while tam > 34 and _altura(texto, _f(tam, 400), largura, 1.42, 0.7) > disponivel:
         tam -= 2

@@ -1,0 +1,87 @@
+name: Carrossel @perffecesquadrias
+
+# Terca e quinta, 12h BRT (15:00 UTC). O cron do Actions e "best effort" e some em
+# horario de fila (o Reel do @vendanaobra ficou sem run em 27/08/2026): por isso
+# tres horarios, nenhum no minuto 0, e as repescagens entram com --garantir (so
+# publicam se o carrossel do dia nao saiu). A primeira janela espera o meio-dia
+# em ponto.
+
+on:
+  schedule:
+    - cron: "45 14 * * 2,4"   # 11:45 BRT -> espera ate 12:00
+    - cron: "7 16 * * 2,4"    # 13:07 BRT, repescagem
+    - cron: "23 20 * * 2,4"   # 17:23 BRT, repescagem
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Forcar uma peca especifica (slug do carrosseis.json)"
+        required: false
+        type: string
+      ensaio:
+        description: "Ensaio: renderiza e imprime a legenda sem publicar"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: carrossel-perffec
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --quiet pillow
+
+      - name: Esperar o meio-dia em ponto
+        if: github.event_name == 'schedule' && github.event.schedule == '45 14 * * 2,4'
+        run: |
+          alvo=$(date -u -d "$(date -u +%F) 15:00:00" +%s)
+          agora=$(date -u +%s)
+          espera=$(( alvo - agora ))
+          if [ "$espera" -gt 0 ]; then
+            echo "esperando ${espera}s ate 15:00 UTC (12:00 BRT)"
+            sleep "$espera"
+          else
+            echo "runner comecou atrasado (${espera}s); publicando agora"
+          fi
+
+      - name: Publicar carrossel
+        env:
+          META_TOKEN: ${{ secrets.META_TOKEN_PERFFEC }}
+        run: |
+          git pull --rebase --quiet origin main
+          args=""
+          [ -n "${{ inputs.slug }}" ] && args="$args --slug ${{ inputs.slug }}"
+          [ "${{ inputs.ensaio }}" = "true" ] && args="$args --ensaio"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" != "45 14 * * 2,4" ]; then
+            args="$args --garantir"
+          fi
+          python publicar.py $args
+
+      - name: Avisar se falhou
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const hoje = new Date().toISOString().slice(0, 10)
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Carrossel da Perffec falhou em " + hoje,
+              body: "Run: " + context.serverUrl + "/" + context.repo.owner + "/" +
+                    context.repo.repo + "/actions/runs/" + context.runId +
+                    "\n\nCausas comuns: token META_TOKEN_PERFFEC vencido, sequencia esgotada, foto da capa faltando."
+            })
