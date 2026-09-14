@@ -14,13 +14,16 @@ Entrada (dois arquivos em Perffec\\Claude\\, colados pelo Diego, nunca no chat):
                                     developers.facebook.com/apps/1910368269635506/settings/basic
 
 Saída:
-  meta_token_perffec.txt            token de página (não vence) — o publicar.py lê daqui
+  meta_token_perffec.txt            token de USUÁRIO de 60 dias — o publicar.py lê daqui.
+                                    `python autorizar_meta.py --renovar` troca por mais 60
+                                    (sem Explorador), enquanto o atual ainda vale.
   config.json                       ig_user_id do @perffecesquadrias
   secret META_TOKEN_PERFFEC no repo posts-perffec (via API do GitHub, credencial do git)
 """
 from __future__ import annotations
 
 import base64
+from datetime import datetime
 import json
 import os
 import subprocess
@@ -33,6 +36,8 @@ CURTO = os.path.join(PASTA, "meta_token_perffec_curto.txt")
 SECRETO = os.path.join(PASTA, "meta_app_secret_vendanaobra.txt")
 SAIDA = os.path.join(PASTA, "meta_token_perffec.txt")
 APP_ID = "1910368269635506"
+IG_ID = "17841460293101375"      # @perffecesquadrias
+PAGE_ID = "674057852453507"     # Perffec Esquadrias
 API = "https://graph.facebook.com/v21.0"
 BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = "diegohenriquemoraes-eng/posts-perffec"
@@ -52,34 +57,36 @@ def _get(path: str, **q) -> dict:
 
 
 def main() -> None:
-    curto = _ler(CURTO)
     segredo = _ler(SECRETO)
+    if "--renovar" in sys.argv:
+        curto = _ler(SAIDA)   # um token longo ainda válido também pode ser trocado
+    else:
+        curto = _ler(CURTO)
 
     longo = _get("oauth/access_token", grant_type="fb_exchange_token", client_id=APP_ID,
                  client_secret=segredo, fb_exchange_token=curto)["access_token"]
     print("token de usuário de longa duração: ok")
 
-    paginas = _get("me/accounts", fields="name,id,access_token,instagram_business_account{username,id}",
-                   access_token=longo)["data"]
-    perffec = [p for p in paginas if (p.get("instagram_business_account") or {}).get("username") == "perffecesquadrias"]
-    if not perffec:
-        nomes = [f"{p['name']} (ig: {(p.get('instagram_business_account') or {}).get('username')})" for p in paginas]
-        raise SystemExit("o token não alcança a Página da Perffec. Páginas no token: " + "; ".join(nomes) +
-                         "\nGere o token de novo marcando a Página Perffec Esquadrias e o @perffecesquadrias.")
-    pag = perffec[0]
-    token_pagina = pag["access_token"]
-    ig_id = pag["instagram_business_account"]["id"]
-
-    dbg = _get("debug_token", input_token=token_pagina, access_token=longo)["data"]
-    print(f"página {pag['name']} ({pag['id']}) · @perffecesquadrias {ig_id} · expira: {dbg.get('expires_at')} (0 = nunca)")
-    conta = _get(ig_id, fields="username,followers_count", access_token=token_pagina)
-    print(f"conferido: @{conta['username']}, {conta['followers_count']} seguidores")
+    # A Página da Perffec NÃO aparece em me/accounts (o acesso do Diego a ela é
+    # via portfólio, task-based), então não existe token de página. Mas o token de
+    # USUÁRIO alcança o @perffecesquadrias e o content_publishing_limit responde —
+    # conferido no Explorador em 14/09/2026. Vale 60 dias; renovar com --renovar.
+    token_pagina = longo
+    ig_id = IG_ID
+    dbg = _get("debug_token", input_token=longo, access_token=longo)["data"]
+    exp = dbg.get("expires_at", 0)
+    quando = datetime.fromtimestamp(exp).strftime("%d/%m/%Y") if exp else "nunca"
+    conta = _get(ig_id, fields="username,followers_count", access_token=longo)
+    if conta.get("username") != "perffecesquadrias":
+        raise SystemExit(f"token aponta para @{conta.get('username')}; abortando")
+    _get(f"{ig_id}/content_publishing_limit", fields="quota_usage", access_token=longo)
+    print(f"conferido: @{conta['username']}, {conta['followers_count']} seguidores · publicação liberada · vence em {quando}")
 
     with open(SAIDA, "w", encoding="utf-8") as f:
-        f.write(token_pagina + "\n")
+        f.write(longo + "\n")
     cfg_path = os.path.join(BASE, "config.json")
     with open(cfg_path, "w", encoding="utf-8") as f:
-        json.dump({"ig_user_id": ig_id, "page_id": pag["id"]}, f, indent=2)
+        json.dump({"ig_user_id": ig_id, "page_id": PAGE_ID, "token_vence_em": quando}, f, indent=2)
         f.write("\n")
     print(f"gravado: {SAIDA} e config.json")
 
@@ -104,7 +111,8 @@ def main() -> None:
     with urllib.request.urlopen(req) as r:
         print("secret META_TOKEN_PERFFEC:", r.status)
 
-    os.remove(CURTO)
+    if os.path.exists(CURTO):
+        os.remove(CURTO)
     print("token curto apagado. Pronto: commitar config.json e rodar o ensaio no Actions.")
 
 

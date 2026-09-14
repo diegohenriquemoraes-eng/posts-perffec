@@ -135,6 +135,13 @@ def conferir_token(token: str, ig_id: str) -> None:
     if r.get("username") != "perffecesquadrias":
         raise SystemExit(f"token aponta para @{r.get('username')} — não é a Perffec; abortando")
     _log(f"token ok — @{r['username']}, {r['followers_count']} seguidores")
+    dbg = _get("debug_token", {"input_token": token, "access_token": token}).get("data", {})
+    exp = dbg.get("expires_at") or 0
+    if exp:
+        dias = (datetime.fromtimestamp(exp, FUSO_BR) - datetime.now(FUSO_BR)).days
+        _log(f"token vence em {dias} dias")
+        if dias < 10:
+            raise SystemExit(f"TOKEN VENCE EM {dias} DIAS — rodar `python autorizar_meta.py --renovar` no PC do Diego")
 
 
 def subir_e_publicar(caminhos: list[str], data: str, slug: str, legenda: str,
