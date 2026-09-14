@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Publica o carrossel técnico do dia no feed do @perffecesquadrias pela Graph API.
 
-Roda TERÇA e QUINTA, 12h BRT (workflow `carrossel.yml`). Fluxo — o mesmo da
+Roda TERÇA e QUINTA, 7h BRT (workflow `carrossel.yml`). Fluxo — o mesmo da
 mini-aula do @vendanaobra, que rodou sem falha de 24/08 a 03/09/2026:
 
   1. escolhe a próxima peça da `sequencia` do carrosseis.json que ainda não saiu

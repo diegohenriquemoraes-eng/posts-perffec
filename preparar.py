@@ -28,7 +28,7 @@ SAIDA = os.path.join(BASE, "saida")
 ENTREGA = r"C:\Users\NOTE\Desktop\Perffec\Claude\Instagram-Perffec"
 
 DIAS = (1, 3)  # terça e quinta (segunda = 0)
-HORA = "12h"
+HORA = "7h"
 
 
 def _carregar(caminho: str, padrao):
