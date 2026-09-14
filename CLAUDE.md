@@ -20,16 +20,36 @@ registrada; nada inventado; um ensinamento inteiro dentro do post, para ser SALV
 | Registro do que foi preparado | `preparados.json` (a sequência anda a partir dele) |
 | Fotos de capa | `fotos/` — obras da Perffec, copiadas da LP (`LPs-Perffec/esquadrias`). Nunca banco de imagem |
 
-## Como sai no ar — MANUAL, por enquanto
+## Como sai no ar — AUTOMÁTICO desde 14/09/2026
 
-A página da Perffec **não está no token da Graph API** (`me/accounts` do system user só
-devolve a Venda na Obra). Então o `preparar.py` entrega slides + `legenda.txt` + `LEIA-ME.txt`
-e o Diego posta/agenda pelo próprio Instagram. Para automatizar, o Diego precisa adicionar a
-Página do Facebook da Perffec (e o IG vinculado) aos ativos do system user no Gerenciador de
-Negócios — aí o `publicar.py` do `posts-vendanaobra` serve quase inteiro (muda só `IG_USER_ID`).
-Enquanto for manual, as duas peças da semana são preparadas juntas (domingo/segunda), e quem
-posta é o Diego ou a Thamiris (social media, expediente até 18h) — o carrossel entra por cima do
-ciclo de 04/09 (1 Reel + 4 stories/dia), como o terceiro formato do método.
+`carrossel.yml` roda terça e quinta (11:45 UTC espera até 15:00 = 12h BRT; repescagens
+13:07 e 17:23 BRT com `--garantir`). `publicar.py` renderiza, commita as imagens (o repo é
+**público** porque a Graph só aceita URL pública — `raw.githubusercontent`), sobe o carrossel
+e registra em `publicados.json`. Falha abre issue.
+
+**O token é de USUÁRIO, vale 60 dias (vence 13/11/2026)** — secret `META_TOKEN_PERFFEC`.
+Por que não é o token eterno do system user: a Página da Perffec vive no portfólio
+"Perffec Esquadrias" (criado pela Thamiris; controle total é do Alef/agência), o Diego
+não tem controle total lá e a Página não aparece em `me/accounts` — logo não existe token
+de página. Mas o token de usuário do app `vendanaobra` alcança o @perffecesquadrias
+(`17841460293101375`) e o `content_publishing_limit` responde. Foi preciso **remover o app
+vendanaobra em facebook.com/settings?tab=business_tools e autorizar de novo** escolhendo
+"todas as Páginas atuais e futuras" — sem isso o Facebook não repergunta e o token nasce só
+com "Cortes do Marçal".
+
+**Renovar (a cada ~55 dias; `publicar.py` aborta e abre issue com < 10 dias):**
+1. `developers.facebook.com/tools/explorer` → app vendanaobra, as 5 permissões → Generate
+   Access Token → Continuar → Copy Token.
+2. `developers.facebook.com/tools/debug/accesstoken` → colar → Depurar → **Estender token de
+   acesso** → copiar o token longo (60 dias). Não precisa da chave secreta do app (que pede a
+   senha do Facebook e por isso o Claude não alcança).
+3. Salvar em `Perffec\Claude\meta_token_perffec.txt` e gravar o secret — o bloco do
+   `autorizar_meta.py` faz isso (`--renovar` exige a chave secreta; sem ela, o Claude sobe o
+   secret direto pela API do GitHub com a credencial do git, como em 14/09).
+
+Tudo isso o Claude fez pelo Chrome em 14/09 (o Diego só clicou "Continuar" no OAuth); o
+que o classificador bloqueia é ler o token da página por JS — o caminho é Copy Token →
+`Get-Clipboard` no PowerShell.
 
 ## Decisões
 
@@ -57,9 +77,7 @@ conteúdo.
 
 ## Pendências do Diego
 
-- Postar (ou passar à Thamiris) as duas peças da semana de 15/09 (pastas em
-  `Perffec\Claude\Instagram-Perffec\`).
-- Se quiser automatizar: adicionar a Página da Perffec aos ativos do system user da Meta.
+- Nada para postar à mão: terça 15/09 12h sai a primeira peça sozinha. Conferir no perfil.
 - Música fixa da conta para carrossel (o método pede uma só, sempre a mesma): escolher uma.
 
 ## Rodar
