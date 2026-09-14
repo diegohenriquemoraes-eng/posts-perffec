@@ -1,0 +1,95 @@
+{
+  "_regras": [
+    "Todo carrossel sai de material JA PUBLICADO pela Perffec: o e-book 'Compare com criterio' (Perffec\\Claude\\Ebook-Guia-Esquadrias, aprovado pelo Diego em 04/09/2026), os posts do blog perffec.com.br e as paginas de servico do site. O campo 'fonte' obriga a dizer de onde veio. Quando a fonte nao cobre, a peca nao entra: pergunta-se ao Diego.",
+    "Voz: a do blog (VOZ-PERFFEC.md do repo blog-perffec, arquivado): abre situando a decisao do leitor, nao a empresa; cita a norma pelo codigo; tom professoral-acessivel; zero giria; zero erro de portugues.",
+    "Nunca inventar numero, percentual, cliente, obra ou depoimento. Numero so com fonte (ABNT, INMETRO, ABAL, ABIVIDRO, CBIC) ou como exemplo didatico marcado. Norma so com numero e titulo conferidos.",
+    "Publico: arquiteto, engenheiro, construtor e o cliente final de alto padrao que pesquisa antes de especificar. O post ENSINA; a venda vem da autoridade demonstrada. Nao vender no miolo — o slide 'Na Perffec' traz um fato verificavel, nao um slogan.",
+    "Fatos da Perffec que podem ser afirmados (todos do e-book): tres familias Standard/Prime/Chroma; setor de engenharia proprio que dimensiona vidro e perfil por vao antes de cotar; laudo de ensaio das linhas; ate 2 visitas tecnicas sem custo; medicao em ate 7 dias uteis apos obra liberada; tolerancia de 30 mm; prazo contado da medicao definitiva e do sinal; aditivo com material comprado ressarcido; garantia de 5 anos por escrito; fabrica propria em Aguas de Lindoia e escritorio em Amparo. Fora disso, nao afirmar.",
+    "Formato: 4:5, 7 a 9 slides, capa com FOTO DE OBRA DA PERFFEC (pasta fotos/) e gancho de 4 a 8 palavras; uma ideia por slide; ultimo slide pede a acao. Blocos herdados do e-book: Traducao, Sinal de alerta, Na Perffec.",
+    "CICLO DE CTA (o mesmo que o @vendanaobra corrigiu em 31/08/2026): salvar -> enviar (para o arquiteto / para quem esta na mesma fase da obra) -> pergunta. Nunca 'comente a palavra X': nao ha robo de Direct no @perffecesquadrias.",
+    "Cadencia: 2 por semana, terca e quinta, 12h. Publicacao MANUAL pelo Diego (a pagina da Perffec nao esta no token da Graph API); o preparar.py entrega slides + legenda em Perffec\\Claude\\Instagram-Perffec\\.",
+    "Perffec e Venda na Obra nao se misturam: nada de @vendanaobra, Raio-X, Venda 10x ou 'venda' como tema. Aqui o assunto e esquadria, vidro, norma, obra."
+  ],
+  "sequencia": [
+    "mesma-janela-tres-precos",
+    "onde-vidro-de-seguranca-e-obrigatorio"
+  ],
+  "pecas": {
+    "mesma-janela-tres-precos": {
+      "titulo": "Por que a mesma janela tem três preços",
+      "fonte": "E-book Compare com critério, cap. 3 (Por que a mesma janela tem três preços) e cap. 9 (Compare na mesma régua)",
+      "cta": {"tipo": "salvar"},
+      "slides": [
+        {"tipo": "capa", "foto": "porta-correr-cozinha.jpg", "etiqueta": "Guia técnico · Orçamento",
+         "gancho": "A mesma janela. Três preços. Nenhum está errado."},
+        {"tipo": "texto",
+         "titulo": "Você pediu \"uma janela de correr de 2,00 x 1,20\" e recebeu três valores muito diferentes.",
+         "texto": "Não é que uma empresa seja honesta e a outra não.\n\n\"Janela de correr\" pode ser feita em sistemas completamente diferentes — e cada empresa cotou o seu."},
+        {"tipo": "texto", "rotulo": "O que é uma linha",
+         "titulo": "A indústria de alumínio não vende janela pronta. Vende sistemas de perfis: as linhas.",
+         "texto": "A empresa de esquadrias corta, monta e instala.\n\nTrocar de linha muda a espessura do perfil, o vão que a janela vence, o vidro que cabe, as vedações, quanto alumínio aparece — e o preço."},
+        {"tipo": "lista", "titulo": "Os três degraus",
+         "itens": [
+           ["Padrão", "Uso geral, vãos pequenos e médios. Perfis leves, vidros simples, vedação básica. No lugar certo, cumpre o papel."],
+           ["Desempenho", "Vãos maiores, fachadas expostas, quem quer silêncio e estanqueidade. Perfis robustos, aceita laminado e insulado, mais vedações."],
+           ["Premium / minimalista", "Grandes panos de vidro, portas de varanda de 3 a 6 metros. Perfis embutidos, folhas pesadas, ferragens especiais. Exige projeto e instalação de alto nível."]
+         ]},
+        {"tipo": "traducao",
+         "texto": "A diferença entre uma linha e outra é: quanto vidro você enxerga, quanto vão a janela vence e quanto vento, chuva e barulho ela segura.\n\nPeça para sentir isso numa amostra."},
+        {"tipo": "texto", "rotulo": "A pergunta certa",
+         "titulo": "Não é \"por que a sua é mais cara?\"",
+         "texto": "É: \"em qual linha você cotou, de qual fabricante, e por quê?\"\n\nResposta evasiva (\"é a nossa linha padrão\") é um sinal. \"Cotei na linha X porque o vão da varanda tem 3,60 m e a Y não vence isso\" é outro."},
+        {"tipo": "alerta", "titulo": "Preço por metro quadrado.",
+         "texto": "Esquadria não é piso: janela de banheiro e porta de varanda têm custos por m² completamente diferentes.\n\nCompare vão por vão, na mesma linha, com o mesmo vidro. Só então olhe o total."},
+        {"tipo": "perffec",
+         "titulo": "Três famílias — e cada vão da proposta diz a linha e o porquê.",
+         "texto": "Standard (uso geral), Prime (grandes vãos e desempenho) e Chroma (montante oculto).\n\nA nossa proposta descreve, vão por vão, a linha escolhida e o motivo. Peça o mesmo ao outro fornecedor."},
+        {"tipo": "cta", "titulo": "Vai comparar orçamentos? Guarde este post.",
+         "texto": "É a leitura de dois minutos que evita comparar três coisas diferentes como se fossem uma."}
+      ],
+      "legenda": "Três orçamentos para a mesma janela, três preços. Antes de concluir que alguém está cobrando demais, olhe a linha.\n\n\"Janela de correr\" não é um produto: é uma tipologia. O que define desempenho e preço é o sistema de perfis em que ela foi cotada — a linha. Cada fabricante de alumínio tem as suas, e elas mudam a espessura do perfil, o vão que a janela vence, o vidro que cabe, as vedações e quanto alumínio aparece.\n\nPor isso a pergunta que resolve a comparação não é \"por que a sua é mais cara?\". É \"em qual linha você cotou, de qual fabricante, e por quê?\". Uma resposta técnica cita o vão e o motivo. Uma resposta evasiva já é informação.\n\nE desconfie de preço por metro quadrado: esquadria não é piso. Compare vão por vão, na mesma linha, com o mesmo vidro — e só então olhe o total.\n\nNa Perffec trabalhamos com três famílias (Standard, Prime e Chroma), e a proposta descreve, vão por vão, a linha escolhida e o porquê. Peça o mesmo a qualquer fornecedor.\n\nSalve este post para a hora de comparar as propostas. Qual foi a maior diferença de preço que você já recebeu para a mesma janela?\n\n#esquadriasdealuminio #janelasdealuminio #arquitetura #construcaocivil #obra #amparo #aguasdelindoia #campinas"
+    },
+    "onde-vidro-de-seguranca-e-obrigatorio": {
+      "titulo": "Onde o vidro de segurança é obrigatório",
+      "fonte": "E-book Compare com critério, cap. 4 (O vidro: conforto, segurança e a parte da lei); blog perffec.com.br/as-normas-tecnicas-do-vidro/",
+      "cta": {"tipo": "enviar"},
+      "slides": [
+        {"tipo": "capa", "foto": "guarda-corpo.jpg", "etiqueta": "Guia técnico · Vidro",
+         "gancho": "Vidro comum aqui é proibido. E o orçamento barato não avisa."},
+        {"tipo": "lista", "titulo": "Três vidros, três funções",
+         "itens": [
+           ["Comum (float)", "Sem tratamento. Quebra em cacos grandes e cortantes. Proibido em várias aplicações — e barato, por isso aparece onde não deveria."],
+           ["Temperado", "Tratamento térmico: muito mais resistente, quebra em grãos pequenos. É vidro de segurança. Não pode ser cortado nem furado depois de pronto."],
+           ["Laminado", "Duas chapas coladas por uma película. Se quebra, os cacos ficam presos: é o vidro que não cai. Barra melhor o som e o ultravioleta."]
+         ]},
+        {"tipo": "traducao",
+         "texto": "Temperado protege contra corte. Laminado protege contra queda e barulho. Insulado protege contra calor.\n\nE nenhum vidro faz milagre numa janela que deixa passar ar: o isolamento é do conjunto — vidro, perfil que vede e instalação bem feita."},
+        {"tipo": "texto", "rotulo": "A parte da lei",
+         "titulo": "A ABNT NBR 7199 define, aplicação por aplicação, que vidro pode ser usado.",
+         "texto": "Nenhum orçamento pode ficar abaixo dela para economizar.\n\nOs casos que aparecem em toda casa estão nos dois próximos slides."},
+        {"tipo": "lista", "titulo": "Onde é obrigatório vidro de segurança",
+         "itens": [
+           ["Portas de vidro e painéis ao lado de portas", "Vidro de segurança: temperado ou laminado."],
+           ["Vidro abaixo de 1,10 m do piso", "Com desnível maior que 1 m do outro lado: vidro de segurança."],
+           ["Junto a escadas e rampas", "A menos de 1,50 m: vidro de segurança."],
+           ["Box de banheiro", "Temperado, na espessura adequada."]
+         ]},
+        {"tipo": "lista", "titulo": "Onde só o laminado serve",
+         "itens": [
+           ["Guarda-corpos de sacada, mezanino e escada", "Laminado, seguindo também a NBR 14718. Segurança de vida: não existe versão econômica."],
+           ["Coberturas, marquises e claraboias", "Laminado — o vidro que, se quebrar, não cai."],
+           ["Pisos, degraus e visores de piscina", "Laminado, dimensionado por engenharia."]
+         ]},
+        {"tipo": "alerta", "titulo": "\"Põe um comum aí que é mais barato.\"",
+         "texto": "Ou o orçamento mais barato cotou temperado onde a norma pede laminado, ou 6 mm onde o cálculo pede 8. É a forma mais comum de baixar preço sem o cliente perceber.\n\nTodo orçamento tem que dizer, peça por peça: tipo, espessura e tratamento do vidro."},
+        {"tipo": "perffec",
+         "titulo": "Espessura é cálculo, não chute.",
+         "texto": "O nosso setor de engenharia dimensiona vidro e perfil para cada vão antes de cotar — pelo tamanho da chapa e pela pressão de vento do lugar (NBR 6123). Um painel grande no andar alto de uma casa em morro pede vidro mais grosso que a mesma medida no térreo abrigado.\n\nPergunte ao outro fornecedor quem calculou o vidro dele."},
+        {"tipo": "cta", "rotulo": "Mande para o seu arquiteto",
+         "titulo": "Vai fechar esquadria com vidro? Envie este post para quem está detalhando a obra.",
+         "texto": "Vidro abaixo da norma é o erro que machuca — e o mais fácil de esconder num orçamento barato."}
+      ],
+      "legenda": "Vidro é onde a norma manda — e é onde metade das diferenças de preço entre propostas se esconde.\n\nComum, temperado e laminado não são três qualidades do mesmo produto. São três funções: o temperado protege contra corte (quebra em grãos pequenos), o laminado protege contra queda e barulho (os cacos ficam presos na película), o insulado protege contra calor. O comum não protege contra nada — e por ser barato aparece onde não deveria.\n\nA ABNT NBR 7199 define, aplicação por aplicação, que vidro pode ser usado. Os casos de toda casa: portas de vidro e painéis ao lado delas pedem vidro de segurança; guarda-corpos pedem laminado (seguindo também a NBR 14718); coberturas, marquises e claraboias, laminado; box, temperado na espessura adequada; pisos e visores de piscina, laminado dimensionado por engenharia.\n\nE a espessura é cálculo, não chute: depende do tamanho da chapa e da pressão de vento do lugar (NBR 6123). Por isso todo orçamento tem que dizer, peça por peça, tipo, espessura e tratamento do vidro.\n\nNa Perffec o setor de engenharia dimensiona vidro e perfil para cada vão antes de cotar. Vale perguntar a qualquer fornecedor quem calculou o vidro dele.\n\nEnvie este post para o seu arquiteto ou para quem está na fase de esquadrias. Em qual desses pontos você já viu vidro comum instalado?\n\n#vidrotemperado #vidrolaminado #nbr7199 #guardacorpodevidro #esquadriasdealuminio #arquitetura #construcaocivil #amparo #campinas"
+    }
+  }
+}
