@@ -27,7 +27,9 @@ devolve a Venda na Obra). Então o `preparar.py` entrega slides + `legenda.txt` 
 e o Diego posta/agenda pelo próprio Instagram. Para automatizar, o Diego precisa adicionar a
 Página do Facebook da Perffec (e o IG vinculado) aos ativos do system user no Gerenciador de
 Negócios — aí o `publicar.py` do `posts-vendanaobra` serve quase inteiro (muda só `IG_USER_ID`).
-Enquanto for manual, carrossel de terça é preparado no domingo/segunda, junto com o de quinta.
+Enquanto for manual, as duas peças da semana são preparadas juntas (domingo/segunda), e quem
+posta é o Diego ou a Thamiris (social media, expediente até 18h) — o carrossel entra por cima do
+ciclo de 04/09 (1 Reel + 4 stories/dia), como o terceiro formato do método.
 
 ## Decisões
 
@@ -55,7 +57,8 @@ conteúdo.
 
 ## Pendências do Diego
 
-- Postar as duas peças da semana de 15/09 (pastas em `Perffec\Claude\Instagram-Perffec\`).
+- Postar (ou passar à Thamiris) as duas peças da semana de 15/09 (pastas em
+  `Perffec\Claude\Instagram-Perffec\`).
 - Se quiser automatizar: adicionar a Página da Perffec aos ativos do system user da Meta.
 - Música fixa da conta para carrossel (o método pede uma só, sempre a mesma): escolher uma.
 
