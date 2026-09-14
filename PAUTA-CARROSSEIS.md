@@ -1,6 +1,6 @@
 # Banco de carrosséis técnicos do @perffecesquadrias — pauta e origem
 
-2 por semana (terça e quinta, 7h). Cada linha é um carrossel 4:5 de 7 a 9 slides. **Todo
+2 por semana (terça e sexta, 7h). Cada linha é um carrossel 4:5 de 7 a 9 slides. **Todo
 carrossel sai de material já publicado pela Perffec** — a coluna Fonte diz de onde. Nada é
 inventado: quando a fonte não cobre, a peça não entra no banco, eu pergunto ao Diego.
 

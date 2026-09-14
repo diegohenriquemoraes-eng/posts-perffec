@@ -1,6 +1,6 @@
 name: Carrossel @perffecesquadrias
 
-# Terca e quinta, 7h BRT (10:00 UTC) — pedido do Diego em 14/09/2026. O cron do Actions e "best effort" e some em
+# Terca e SEXTA, 7h BRT (10:00 UTC) — pedido do Diego em 14/09/2026. O cron do Actions e "best effort" e some em
 # horario de fila (o Reel do @vendanaobra ficou sem run em 27/08/2026): por isso
 # tres horarios, nenhum no minuto 0, e as repescagens entram com --garantir (so
 # publicam se o carrossel do dia nao saiu). A primeira janela espera as 7h em
@@ -8,9 +8,9 @@ name: Carrossel @perffecesquadrias
 
 on:
   schedule:
-    - cron: "45 9 * * 2,4"    # 06:45 BRT -> espera ate 07:00
-    - cron: "7 11 * * 2,4"    # 08:07 BRT, repescagem
-    - cron: "23 15 * * 2,4"   # 12:23 BRT, repescagem
+    - cron: "45 9 * * 2,5"    # 06:45 BRT -> espera ate 07:00
+    - cron: "7 11 * * 2,5"    # 08:07 BRT, repescagem
+    - cron: "23 15 * * 2,5"   # 12:23 BRT, repescagem
   workflow_dispatch:
     inputs:
       slug:
@@ -46,7 +46,7 @@ jobs:
       - run: pip install --quiet pillow
 
       - name: Esperar as 7h em ponto
-        if: github.event_name == 'schedule' && github.event.schedule == '45 9 * * 2,4'
+        if: github.event_name == 'schedule' && github.event.schedule == '45 9 * * 2,5'
         run: |
           alvo=$(date -u -d "$(date -u +%F) 10:00:00" +%s)
           agora=$(date -u +%s)
@@ -66,7 +66,7 @@ jobs:
           args=""
           [ -n "${{ inputs.slug }}" ] && args="$args --slug ${{ inputs.slug }}"
           [ "${{ inputs.ensaio }}" = "true" ] && args="$args --ensaio"
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" != "45 9 * * 2,4" ]; then
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" != "45 9 * * 2,5" ]; then
             args="$args --garantir"
           fi
           python publicar.py $args

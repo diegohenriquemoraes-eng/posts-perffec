@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """Prepara o carrossel técnico do @perffecesquadrias para o Diego postar do celular.
 
-    python preparar.py                 # a próxima peça da sequência, na próxima terça/quinta
-    python preparar.py --semana        # as duas da semana (terça e quinta)
+    python preparar.py                 # a próxima peça da sequência, na próxima terça/sexta
+    python preparar.py --semana        # as duas da semana (terça e sexta)
     python preparar.py --slug X        # uma peça específica (não marca como preparada)
     python preparar.py --data 2026-09-15
 
 Saída: saida/<data>-<slug>/ (gitignorado) e uma cópia em
 Perffec\\Claude\\Instagram-Perffec\\<data>-<slug>\\ com slide-01..NN.jpg, legenda.txt e
 visao-geral.jpg. O que foi preparado fica em preparados.json — a sequência anda a partir
-dele. A publicação é MANUAL: a página da Perffec não está no token da Graph API.
+dele. A publicação normal é automática (publicar.py); isto serve para peça avulsa à mão.
 """
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ PREPARADOS = os.path.join(BASE, "preparados.json")
 SAIDA = os.path.join(BASE, "saida")
 ENTREGA = r"C:\Users\NOTE\Desktop\Perffec\Claude\Instagram-Perffec"
 
-DIAS = (1, 3)  # terça e quinta (segunda = 0)
+DIAS = (1, 4)  # terça e sexta (segunda = 0)
 HORA = "7h"
 
 

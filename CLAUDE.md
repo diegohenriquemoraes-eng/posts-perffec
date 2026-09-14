@@ -5,7 +5,7 @@ Venda na Obra, quero 2 carrosséis por semana com conteúdo técnico no Instagra
 
 ## O que é
 
-2 carrosséis/semana (**terça e quinta, 7h** — era 12h, o Diego mudou em 14/09), 4:5, 7 a 9 slides, conteúdo técnico de
+2 carrosséis/semana (**terça e sexta, 7h** — era ter/qui 12h, o Diego mudou em 14/09), 4:5, 7 a 9 slides, conteúdo técnico de
 esquadria/vidro/norma/obra, para arquiteto, engenheiro, construtor e cliente final de alto
 padrão. O critério é o mesmo da mini-aula do @vendanaobra: **toda peça sai de material já
 publicado** (aqui: o e-book "Compare com critério" e o blog da Perffec), com a fonte
@@ -22,7 +22,7 @@ registrada; nada inventado; um ensinamento inteiro dentro do post, para ser SALV
 
 ## Como sai no ar — AUTOMÁTICO desde 14/09/2026
 
-`carrossel.yml` roda terça e quinta (09:45 UTC espera até 10:00 = 7h BRT; repescagens
+`carrossel.yml` roda terça e sexta (09:45 UTC espera até 10:00 = 7h BRT; repescagens
 08:07 e 12:23 BRT com `--garantir`). `publicar.py` renderiza, commita as imagens (o repo é
 **público** porque a Graph só aceita URL pública — `raw.githubusercontent`), sobe o carrossel
 e registra em `publicados.json`. Falha abre issue.

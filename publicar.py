@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Publica o carrossel técnico do dia no feed do @perffecesquadrias pela Graph API.
 
-Roda TERÇA e QUINTA, 7h BRT (workflow `carrossel.yml`). Fluxo — o mesmo da
+Roda TERÇA e SEXTA, 7h BRT (workflow `carrossel.yml`). Fluxo — o mesmo da
 mini-aula do @vendanaobra, que rodou sem falha de 24/08 a 03/09/2026:
 
   1. escolhe a próxima peça da `sequencia` do carrosseis.json que ainda não saiu
@@ -45,7 +45,7 @@ CONFIG = os.path.join(BASE, "config.json")
 API = "https://graph.facebook.com/v21.0"
 REPO_RAW = "https://raw.githubusercontent.com/diegohenriquemoraes-eng/posts-perffec/main"
 FUSO_BR = timezone(timedelta(hours=-3))
-DIAS = (1, 3)  # terça, quinta
+DIAS = (1, 4)  # terça, sexta
 
 
 def _log(msg: str) -> None:
@@ -197,7 +197,7 @@ def main() -> None:
     publicados = _carregar(PUBLICADOS, [])
 
     if a.slug is None and not a.ensaio and agora.weekday() not in DIAS:
-        _log("carrossel só sai terça e quinta — nada a fazer")
+        _log("carrossel só sai terça e sexta — nada a fazer")
         return
     if a.garantir and ja_saiu_hoje(publicados, hoje):
         _log("carrossel do dia já está no ar — nada a fazer")
