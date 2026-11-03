@@ -1,5 +1,10 @@
 # posts-perffec — carrossel técnico do @perffecesquadrias
 
+> **DESLIGADO DE VEZ em 03/11/2026, a pedido do Diego.** Só 2 carrosséis saíram (15 e 22/09); depois
+> falhou toda semana. Workflow `carrossel.yml` desativado no GitHub (`gh workflow disable`) e os 36
+> avisos de falha fechados. O Instagram da Perffec agora é da Thamiris, que produz e posta (processo
+> MKT-02 em `Perffec\Claude\Processos\`). Não religar sem pedido. O resto deste arquivo é histórico.
+
 Criado em 14/09/2026 a pedido do Diego: *"assim como fazemos os carrosséis no Instagram do
 Venda na Obra, quero 2 carrosséis por semana com conteúdo técnico no Instagram da Perffec"*.
 
